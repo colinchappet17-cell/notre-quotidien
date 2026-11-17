@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notre Quotidien</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <style>
+    :root {
+      --sage: #829582;
+      --cream: #f7f5ef;
+      --ink: #39443b;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    nav {
+      background: #fff;
+      padding: 12px 5%;
+      border-bottom: 1px solid #e9e5dc;
+    }
+
+    nav strong {
+      color: var(--sage);
+      font-size: 1.2rem;
+    }
+
+    main.container {
+      padding-top: 2rem;
+      padding-bottom: 3rem;
+    }
+
+    .welcome {
+      background: #e7ede5;
+      padding: 2rem;
+      border-radius: 18px;
+      margin-bottom: 2rem;
+    }
+
+    article {
+      border: 1px solid #e9e5dc;
+      border-radius: 16px;
+      box-shadow: 0 3px 12px #00000008;
+    }
+
+    h2, h3 {
+      color: var(--ink);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    button {
+      background: var(--sage);
+      border-color: var(--sage);
+    }
+
+    button:hover {
+      background: #6c806d;
+      border-color: #6c806d;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .item:last-child {
+      border-bottom: none;
+    }
+
+    .item small {
+      color: #788078;
+    }
+
+    .done {
+      text-decoration: line-through;
+      opacity: .5;
+    }
+
+    .delete {
+      background: #eee9e2;
+      color: #665e55;
+      border: none;
+      padding: 5px 10px;
+      font-size: .8rem;
+    }
+
+    .muted {
+      color: #7b837b;
+      font-size: .9rem;
+    }
+
+    .section-title {
+      margin-top: 2.5rem;
+    }
+
+    footer {
+      text-align: center;
+      color: #899087;
+      padding: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="container-fluid">
+  <ul>
+    <li><strong>♡ Notre Quotidien</strong></li>
+  </ul>
+  <ul>
+    <li><a href="#agenda">Agenda</a></li>
+    <li><a href="#taches">Tâches</a></li>
+    <li><a href="#courses" role="button">Courses</a></li>
+  </ul>
+</nav>
+
+<main class="container">
+
+  <div class="welcome">
+    <hgroup>
+      <h2>Notre petit espace à deux ♡</h2>
+      <h3>Organisons notre quotidien ensemble.</h3>
+    </hgroup>
+    <p>Les rendez-vous, les choses à faire et les petits projets de la vie à deux, au même endroit.</p>
+  </div>
+
+  <div class="grid">
+
+    <section>
+      <article id="agenda">
+        <h2>📅 Notre agenda</h2>
+        <p class="muted">Les rendez-vous à venir.</p>
+
+        <form id="eventForm">
+          <input id="eventName" placeholder="Nom du rendez-vous" required>
+          <input id="eventDate" type="date" required>
+          <input id="eventTime" type="time">
+          <button type="submit">Ajouter au calendrier</button>
+        </form>
+
+        <div id="events"></div>
+      </article>
+    </section>
+
+    <section>
+      <article id="taches">
+        <h2>✅ Nos tâches</h2>
+        <p class="muted">On se répartit les choses à faire.</p>
+
+        <form id="taskForm">
+          <input id="taskName" placeholder="Que faut-il faire ?" required>
+          <select id="taskPerson">
+            <option value="À deux">À deux</option>
+            <option value="Moi">Moi</option>
+            <option value="Mon/ma partenaire">Mon/ma partenaire</option>
+          </select>
+          <button type="submit">Ajouter une tâche</button>
+        </form>
+
+        <div id="tasks"></div>
+      </article>
+    </section>
+
+  </div>
+
+  <div class="grid section-title">
+
+    <section>
+      <article id="courses">
+        <h2>🛒 Liste de courses</h2>
+        <p class="muted">Pour ne rien oublier au magasin.</p>
+
+        <form id="shoppingForm">
+          <input id="shoppingName" placeholder="Ajouter un article..." required>
+          <button type="submit">Ajouter</button>
+        </form>
+
+        <div id="shopping"></div>
+      </article>
+    </section>
+
+    <section>
+      <article id="projects">
+        <h2>🌿 Nos projets</h2>
+        <p class="muted">Toutes ces petites et grandes choses que nous voulons réaliser ensemble.</p>
+
+        <form id="projectForm">
+          <input id="projectName" placeholder="Notre prochain projet..." required>
+          <button type="submit">Ajouter un projet</button>
+        </form>
+
+        <div id="projectsList"></div>
+      </article>
+    </section>
+
+  </div>
+
+  <section class="section-title">
+    <article>
+      <h2>💚 Un quotidien qui nous ressemble</h2>
+      <p>Un rendez-vous, une course, une idée ou un projet : tout commence ici.</p>
+      <p class="muted">Pensez à consulter régulièrement votre espace pour rester organisés ensemble.</p>
+    </article>
+  </section>
+
+  <section aria-label="Subscribe example">
+    <div class="container">
+      <article>
+        <hgroup>
+          <h2>Notre espace, notre histoire ♡</h2>
+          <h3>Un petit pas chaque jour, ensemble.</h3>
+        </hgroup>
+        <p>Retrouvez vos listes et vos rendez-vous dans votre espace personnel.</p>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer class="container">
+  <small>♡ Notre Quotidien • Fait avec amour</small>
+</footer>
+
+<script>
+  const load = key => JSON.parse(localStorage.getItem(key) || "[]");
+  const save = (key, data) => localStorage.setItem(key, JSON.stringify(data));
+
+  let events = load("nq-events");
+  let tasks = load("nq-tasks");
+  let shopping = load("nq-shopping");
+  let projects = load("nq-projects");
+
+  function removeItem(array, key, id) {
+    const updated = array.filter(item => item.id !== id);
+    save(key, updated);
+    return updated;
+  }
+
+  function renderEvents() {
+    const container = document.getElementById("events");
+    container.innerHTML = "";
+
+    events.sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+
+    if (!events.length) {
+      container.innerHTML = '<p class="muted">Aucun rendez-vous pour le moment.</p>';
+    }
+
+    events.forEach(event => {
+      const div = document.createElement("div");
+      div.className = "item";
+
+      const info = document.createElement("span");
+      info.textContent = event.name + " — " + event.date + (event.time ? " à " + event.time : "");
+
+      const btn = document.createElement("button");
+      btn.className = "delete";
+      btn.textContent = "Supprimer";
+      btn.type = "button";
+      btn.onclick = () => {
+        events = removeItem(events, "nq-events", event.id);
+        renderEvents();
+      };
+
+      div.append(info, btn);
+      container.append(div);
+    });
+  }
+
+  function renderTasks() {
+    const container = document.getElementById("tasks");
+    container.innerHTML = "";
+
+    if (!tasks.length) {
+      container.innerHTML = '<p class="muted">Aucune tâche pour le moment.</p>';
+    }
+
+    tasks.forEach(task => {
+      const div = document.createElement("div");
+      div.className = "item";
+
+      const label = document.createElement("label");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = task.done;
+      checkbox.style.width = "auto";
+      checkbox.onchange = () => {
+        task.done = checkbox.checked;
+        save("nq-tasks", tasks);
+        renderTasks();
+      };
+
+      const text = document.createElement("span");
+      text.textContent = " " + task.name + " — " + task.person;
+      if (task.done) text.className = "done";
+
+      label.append(checkbox, text);
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "delete";
+      btn.textContent = "Supprimer";
+      btn.onclick = () => {
+        tasks = removeItem(tasks, "nq-tasks", task.id);
+        renderTasks();
+      };
+
+      div.append(label, btn);
+      container.append(div);
+    });
+  }
+
+  function renderShopping() {
+    const container = document.getElementById("shopping");
+    container.innerHTML = "";
+
+    if (!shopping.length) {
+      container.innerHTML = '<p class="muted">Votre liste est vide.</p>';
+    }
+
+    shopping.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "item";
+
+      const label = document.createElement("label");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = item.done;
+      checkbox.style.width = "auto";
+      checkbox.onchange = () => {
+        item.done = checkbox.checked;
+        save("nq-shopping", shopping);
+        renderShopping();
+      };
+
+      const text = document.createElement("span");
+      text.textContent = " " + item.name;
+      if (item.done) text.className = "done";
+
+      label.append(checkbox, text);
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "delete";
+      btn.textContent = "Supprimer";
+      btn.onclick = () => {
+        shopping = removeItem(shopping, "nq-shopping", item.id);
+        renderShopping();
+      };
+
+      div.append(label, btn);
+      container.append(div);
+    });
+  }
+
+  function renderProjects() {
+    const container = document.getElementById("projectsList");
+    container.innerHTML = "";
+
+    if (!projects.length) {
+      container.innerHTML = '<p class="muted">Ajoutez votre premier projet à deux !</p>';
+    }
+
+    projects.forEach(project => {
+      const div = document.createElement("div");
+      div.className = "item";
+
+      const name = document.createElement("span");
+      name.textContent = "♡ " + project.name;
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "delete";
+      btn.textContent = "Supprimer";
+      btn.onclick = () => {
+        projects = removeItem(projects, "nq-projects", project.id);
+        renderProjects();
+      };
+
+      div.append(name, btn);
+      container.append(div);
+    });
+  }
+
+  document.getElementById("eventForm").addEventListener("submit", e => {
+    e.preventDefault();
+    events.push({
+      id: Date.now(),
+      name: document.getElementById("eventName").value,
+      date: document.getElementById("eventDate").value,
+      time: document.getElementById("eventTime").value
+    });
+    save("nq-events", events);
+    e.target.reset();
+    renderEvents();
+  });
+
+  document.getElementById("taskForm").addEventListener("submit", e => {
+    e.preventDefault();
+    tasks.push({
+      id: Date.now(),
+      name: document.getElementById("taskName").value,
+      person: document.getElementById("taskPerson").value,
+      done: false
+    });
+    save("nq-tasks", tasks);
+    e.target.reset();
+    renderTasks();
+  });
+
+  document.getElementById("shoppingForm").addEventListener("submit", e => {
+    e.preventDefault();
+    shopping.push({
+      id: Date.now(),
+      name: document.getElementById("shoppingName").value,
+      done: false
+    });
+    save("nq-shopping", shopping);
+    e.target.reset();
+    renderShopping();
+  });
+
+  document.getElementById("projectForm").addEventListener("submit", e => {
+    e.preventDefault();
+    projects.push({
+      id: Date.now(),
+      name: document.getElementById("projectName").value
+    });
+    save("nq-projects", projects);
+    e.target.reset();
+    renderProjects();
+  });
+
+  renderEvents();
+  renderTasks();
+  renderShopping();
+  renderProjects();
+</script>
+
+</body>
+</html>
