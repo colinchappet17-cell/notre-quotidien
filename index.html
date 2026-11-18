@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5ef">
   <title>Notre Quotidien</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
   <style>
@@ -10,113 +11,44 @@
       --sage: #829582;
       --cream: #f7f5ef;
       --ink: #39443b;
+      --pico-primary: var(--sage);
+      --pico-primary-hover: #6c806d;
+      --pico-background-color: var(--cream);
+      --pico-color: var(--ink);
     }
-
-    body {
-      background: var(--cream);
-      color: var(--ink);
-    }
-
-    nav {
-      background: #fff;
-      padding: 12px 5%;
-      border-bottom: 1px solid #e9e5dc;
-    }
-
-    nav strong {
-      color: var(--sage);
-      font-size: 1.2rem;
-    }
-
-    main.container {
-      padding-top: 2rem;
-      padding-bottom: 3rem;
-    }
-
-    .welcome {
-      background: #e7ede5;
-      padding: 2rem;
-      border-radius: 18px;
-      margin-bottom: 2rem;
-    }
-
-    article {
-      border: 1px solid #e9e5dc;
-      border-radius: 16px;
-      box-shadow: 0 3px 12px #00000008;
-    }
-
-    h2, h3 {
-      color: var(--ink);
-    }
-
-    h2 {
-      font-size: 1.4rem;
-    }
-
-    button {
-      background: var(--sage);
-      border-color: var(--sage);
-    }
-
-    button:hover {
-      background: #6c806d;
-      border-color: #6c806d;
-    }
-
-    .item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .item:last-child {
-      border-bottom: none;
-    }
-
-    .item small {
-      color: #788078;
-    }
-
-    .done {
-      text-decoration: line-through;
-      opacity: .5;
-    }
-
-    .delete {
-      background: #eee9e2;
-      color: #665e55;
-      border: none;
-      padding: 5px 10px;
-      font-size: .8rem;
-    }
-
-    .muted {
-      color: #7b837b;
-      font-size: .9rem;
-    }
-
-    .section-title {
-      margin-top: 2.5rem;
-    }
-
-    footer {
-      text-align: center;
-      color: #899087;
-      padding: 2rem;
-    }
+    body { background: var(--cream); color: var(--ink); }
+    nav { background: #fff; padding: 12px 5%; border-bottom: 1px solid #e9e5dc; }
+    nav strong { color: var(--sage); font-size: 1.2rem; }
+    main.container { padding-top: 2rem; padding-bottom: 3rem; }
+    .welcome { background: #e7ede5; padding: 2rem; border-radius: 18px; margin-bottom: 2rem; }
+    article { border: 1px solid #e9e5dc; border-radius: 16px; box-shadow: 0 3px 12px #00000008; }
+    h2, h3 { color: var(--ink); }
+    h2 { font-size: 1.4rem; }
+    button { background: var(--sage); border-color: var(--sage); }
+    button:hover { background: #6c806d; border-color: #6c806d; }
+    .item { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee; }
+    .item:last-child { border-bottom: none; }
+    .done { text-decoration: line-through; opacity: .5; }
+    .delete { background: #eee9e2; color: #665e55; border: none; padding: 5px 10px; font-size: .8rem; width: auto; margin: 0; }
+    .muted { color: #7b837b; font-size: .9rem; }
+    .section-title { margin-top: 2.5rem; }
+    footer { text-align: center; color: #899087; padding: 2rem; }
+    .auth-card { max-width: 520px; margin: 2rem auto; }
+    .status { padding: .8rem 1rem; border-radius: 10px; background: #e7ede5; margin: 1rem 0; }
+    .status.error { background: #f8e8e5; color: #8a382d; }
+    .hidden { display: none !important; }
+    .inline-actions { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
+    .inline-actions button { width: auto; }
+    .topline { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .topline button { width: auto; margin: 0; }
+    .item label { display: flex; align-items: center; gap: .6rem; margin: 0; }
+    .item input[type=checkbox] { width: auto; margin: 0; }
   </style>
 </head>
-
 <body>
 
 <nav class="container-fluid">
-  <ul>
-    <li><strong>♡ Notre Quotidien</strong></li>
-  </ul>
+  <ul><li><strong>♡ Notre Quotidien</strong></li></ul>
   <ul>
     <li><a href="#agenda">Agenda</a></li>
     <li><a href="#taches">Tâches</a></li>
@@ -125,7 +57,6 @@
 </nav>
 
 <main class="container">
-
   <div class="welcome">
     <hgroup>
       <h2>Notre petit espace à deux ♡</h2>
@@ -134,318 +65,392 @@
     <p>Les rendez-vous, les choses à faire et les petits projets de la vie à deux, au même endroit.</p>
   </div>
 
-  <div class="grid">
-
-    <section>
-      <article id="agenda">
-        <h2>📅 Notre agenda</h2>
-        <p class="muted">Les rendez-vous à venir.</p>
-
-        <form id="eventForm">
-          <input id="eventName" placeholder="Nom du rendez-vous" required>
-          <input id="eventDate" type="date" required>
-          <input id="eventTime" type="time">
-          <button type="submit">Ajouter au calendrier</button>
-        </form>
-
-        <div id="events"></div>
-      </article>
-    </section>
-
-    <section>
-      <article id="taches">
-        <h2>✅ Nos tâches</h2>
-        <p class="muted">On se répartit les choses à faire.</p>
-
-        <form id="taskForm">
-          <input id="taskName" placeholder="Que faut-il faire ?" required>
-          <select id="taskPerson">
-            <option value="À deux">À deux</option>
-            <option value="Moi">Moi</option>
-            <option value="Mon/ma partenaire">Mon/ma partenaire</option>
-          </select>
-          <button type="submit">Ajouter une tâche</button>
-        </form>
-
-        <div id="tasks"></div>
-      </article>
-    </section>
-
-  </div>
-
-  <div class="grid section-title">
-
-    <section>
-      <article id="courses">
-        <h2>🛒 Liste de courses</h2>
-        <p class="muted">Pour ne rien oublier au magasin.</p>
-
-        <form id="shoppingForm">
-          <input id="shoppingName" placeholder="Ajouter un article..." required>
-          <button type="submit">Ajouter</button>
-        </form>
-
-        <div id="shopping"></div>
-      </article>
-    </section>
-
-    <section>
-      <article id="projects">
-        <h2>🌿 Nos projets</h2>
-        <p class="muted">Toutes ces petites et grandes choses que nous voulons réaliser ensemble.</p>
-
-        <form id="projectForm">
-          <input id="projectName" placeholder="Notre prochain projet..." required>
-          <button type="submit">Ajouter un projet</button>
-        </form>
-
-        <div id="projectsList"></div>
-      </article>
-    </section>
-
-  </div>
-
-  <section class="section-title">
+  <section id="authSection" class="auth-card">
     <article>
-      <h2>💚 Un quotidien qui nous ressemble</h2>
-      <p>Un rendez-vous, une course, une idée ou un projet : tout commence ici.</p>
-      <p class="muted">Pensez à consulter régulièrement votre espace pour rester organisés ensemble.</p>
+      <h2>Connexion à votre espace ♡</h2>
+      <p class="muted">Connectez-vous avec l'adresse e-mail et le mot de passe de votre compte.</p>
+      <form id="loginForm">
+        <label for="email">Adresse e-mail</label>
+        <input id="email" type="email" autocomplete="username" required placeholder="vous@exemple.fr">
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" autocomplete="current-password" required placeholder="Votre mot de passe">
+        <button id="loginButton" type="submit">Se connecter</button>
+      </form>
+      <p id="authMessage" class="status hidden" role="status"></p>
     </article>
   </section>
 
-  <section aria-label="Subscribe example">
-    <div class="container">
-      <article>
-        <hgroup>
-          <h2>Notre espace, notre histoire ♡</h2>
-          <h3>Un petit pas chaque jour, ensemble.</h3>
-        </hgroup>
-        <p>Retrouvez vos listes et vos rendez-vous dans votre espace personnel.</p>
-      </article>
+  <section id="appSection" class="hidden">
+    <div class="topline">
+      <p class="muted" id="signedInAs">Espace partagé</p>
+      <div class="inline-actions">
+        <span id="syncStatus" class="muted">Connexion…</span>
+        <button id="logoutButton" class="secondary" type="button">Se déconnecter</button>
+      </div>
     </div>
-  </section>
 
+    <div class="grid">
+      <section>
+        <article id="agenda">
+          <h2>📅 Notre agenda</h2>
+          <p class="muted">Les rendez-vous à venir.</p>
+          <form id="eventForm">
+            <input id="eventName" placeholder="Nom du rendez-vous" required>
+            <label for="eventDate">Date</label>
+            <input id="eventDate" type="date" required>
+            <label for="eventTime">Heure (facultatif)</label>
+            <input id="eventTime" type="time">
+            <button type="submit">Ajouter au calendrier</button>
+          </form>
+          <div id="events" aria-live="polite"></div>
+        </article>
+      </section>
+
+      <section>
+        <article id="taches">
+          <h2>✅ Nos tâches</h2>
+          <p class="muted">On se répartit les choses à faire.</p>
+          <form id="taskForm">
+            <input id="taskName" placeholder="Que faut-il faire ?" required>
+            <select id="taskPerson">
+              <option value="À deux">À deux</option>
+              <option value="Moi">Moi</option>
+              <option value="Mon/ma partenaire">Mon/ma partenaire</option>
+            </select>
+            <button type="submit">Ajouter une tâche</button>
+          </form>
+          <div id="tasks" aria-live="polite"></div>
+        </article>
+      </section>
+    </div>
+
+    <div class="grid section-title">
+      <section>
+        <article id="courses">
+          <h2>🛒 Liste de courses</h2>
+          <p class="muted">Pour ne rien oublier au magasin.</p>
+          <form id="shoppingForm">
+            <input id="shoppingName" placeholder="Ajouter un article..." required>
+            <button type="submit">Ajouter</button>
+          </form>
+          <div id="shopping" aria-live="polite"></div>
+        </article>
+      </section>
+
+      <section>
+        <article id="projects">
+          <h2>🌿 Nos projets</h2>
+          <p class="muted">Toutes ces petites et grandes choses que nous voulons réaliser ensemble.</p>
+          <form id="projectForm">
+            <input id="projectName" placeholder="Notre prochain projet..." required>
+            <button type="submit">Ajouter un projet</button>
+          </form>
+          <div id="projectsList" aria-live="polite"></div>
+        </article>
+      </section>
+    </div>
+
+    <section class="section-title">
+      <article>
+        <h2>💚 Un quotidien qui nous ressemble</h2>
+        <p>Un rendez-vous, une course, une idée ou un projet : tout commence ici.</p>
+        <p class="muted">Les modifications sont enregistrées dans votre espace commun.</p>
+      </article>
+    </section>
+  </section>
 </main>
 
 <footer class="container">
   <small>♡ Notre Quotidien • Fait avec amour</small>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  const load = key => JSON.parse(localStorage.getItem(key) || "[]");
-  const save = (key, data) => localStorage.setItem(key, JSON.stringify(data));
+const SUPABASE_URL = 'https://htfmsuxsqwthntxswcvx.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_gqRJhjB6YDGb7hOYU8Gc_Q_KEKCgZJv';
 
-  let events = load("nq-events");
-  let tasks = load("nq-tasks");
-  let shopping = load("nq-shopping");
-  let projects = load("nq-projects");
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
-  function removeItem(array, key, id) {
-    const updated = array.filter(item => item.id !== id);
-    save(key, updated);
-    return updated;
-  }
+let spaceId = null;
+let realtimeChannel = null;
+let events = [], tasks = [], shopping = [], projects = [];
 
-  function renderEvents() {
-    const container = document.getElementById("events");
-    container.innerHTML = "";
+const $ = id => document.getElementById(id);
 
-    events.sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+function showMessage(message, error = false) {
+  const el = $('authMessage');
+  el.textContent = message;
+  el.classList.remove('hidden', 'error');
+  if (error) el.classList.add('error');
+}
 
-    if (!events.length) {
-      container.innerHTML = '<p class="muted">Aucun rendez-vous pour le moment.</p>';
-    }
+function showLogin() {
+  $('appSection').classList.add('hidden');
+  $('authSection').classList.remove('hidden');
+}
 
-    events.forEach(event => {
-      const div = document.createElement("div");
-      div.className = "item";
+function showApp(user) {
+  $('authSection').classList.add('hidden');
+  $('appSection').classList.remove('hidden');
+  $('signedInAs').textContent = 'Connecté(e) : ' + user.email;
+}
 
-      const info = document.createElement("span");
-      info.textContent = event.name + " — " + event.date + (event.time ? " à " + event.time : "");
+function empty(container, message) {
+  $(container).innerHTML = '';
+  const p = document.createElement('p');
+  p.className = 'muted';
+  p.textContent = message;
+  $(container).append(p);
+}
 
-      const btn = document.createElement("button");
-      btn.className = "delete";
-      btn.textContent = "Supprimer";
-      btn.type = "button";
-      btn.onclick = () => {
-        events = removeItem(events, "nq-events", event.id);
-        renderEvents();
-      };
+function deleteButton(action) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'delete';
+  b.textContent = 'Supprimer';
+  b.addEventListener('click', action);
+  return b;
+}
 
-      div.append(info, btn);
-      container.append(div);
-    });
-  }
-
-  function renderTasks() {
-    const container = document.getElementById("tasks");
-    container.innerHTML = "";
-
-    if (!tasks.length) {
-      container.innerHTML = '<p class="muted">Aucune tâche pour le moment.</p>';
-    }
-
-    tasks.forEach(task => {
-      const div = document.createElement("div");
-      div.className = "item";
-
-      const label = document.createElement("label");
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = task.done;
-      checkbox.style.width = "auto";
-      checkbox.onchange = () => {
-        task.done = checkbox.checked;
-        save("nq-tasks", tasks);
-        renderTasks();
-      };
-
-      const text = document.createElement("span");
-      text.textContent = " " + task.name + " — " + task.person;
-      if (task.done) text.className = "done";
-
-      label.append(checkbox, text);
-
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "delete";
-      btn.textContent = "Supprimer";
-      btn.onclick = () => {
-        tasks = removeItem(tasks, "nq-tasks", task.id);
-        renderTasks();
-      };
-
-      div.append(label, btn);
-      container.append(div);
-    });
-  }
-
-  function renderShopping() {
-    const container = document.getElementById("shopping");
-    container.innerHTML = "";
-
-    if (!shopping.length) {
-      container.innerHTML = '<p class="muted">Votre liste est vide.</p>';
-    }
-
-    shopping.forEach(item => {
-      const div = document.createElement("div");
-      div.className = "item";
-
-      const label = document.createElement("label");
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = item.done;
-      checkbox.style.width = "auto";
-      checkbox.onchange = () => {
-        item.done = checkbox.checked;
-        save("nq-shopping", shopping);
-        renderShopping();
-      };
-
-      const text = document.createElement("span");
-      text.textContent = " " + item.name;
-      if (item.done) text.className = "done";
-
-      label.append(checkbox, text);
-
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "delete";
-      btn.textContent = "Supprimer";
-      btn.onclick = () => {
-        shopping = removeItem(shopping, "nq-shopping", item.id);
-        renderShopping();
-      };
-
-      div.append(label, btn);
-      container.append(div);
-    });
-  }
-
-  function renderProjects() {
-    const container = document.getElementById("projectsList");
-    container.innerHTML = "";
-
-    if (!projects.length) {
-      container.innerHTML = '<p class="muted">Ajoutez votre premier projet à deux !</p>';
-    }
-
-    projects.forEach(project => {
-      const div = document.createElement("div");
-      div.className = "item";
-
-      const name = document.createElement("span");
-      name.textContent = "♡ " + project.name;
-
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "delete";
-      btn.textContent = "Supprimer";
-      btn.onclick = () => {
-        projects = removeItem(projects, "nq-projects", project.id);
-        renderProjects();
-      };
-
-      div.append(name, btn);
-      container.append(div);
-    });
-  }
-
-  document.getElementById("eventForm").addEventListener("submit", e => {
-    e.preventDefault();
-    events.push({
-      id: Date.now(),
-      name: document.getElementById("eventName").value,
-      date: document.getElementById("eventDate").value,
-      time: document.getElementById("eventTime").value
-    });
-    save("nq-events", events);
-    e.target.reset();
-    renderEvents();
+function renderEvents() {
+  const c = $('events');
+  c.innerHTML = '';
+  events.sort((a,b) => (a.event_date + (a.event_time || '')).localeCompare(b.event_date + (b.event_time || '')));
+  if (!events.length) return empty('events', 'Aucun rendez-vous pour le moment.');
+  events.forEach(ev => {
+    const row = document.createElement('div');
+    row.className = 'item';
+    const label = document.createElement('span');
+    label.textContent = ev.name + ' — ' + ev.event_date + (ev.event_time ? ' à ' + ev.event_time : '');
+    row.append(label, deleteButton(() => removeRow('events', ev.id)));
+    c.append(row);
   });
+}
 
-  document.getElementById("taskForm").addEventListener("submit", e => {
-    e.preventDefault();
-    tasks.push({
-      id: Date.now(),
-      name: document.getElementById("taskName").value,
-      person: document.getElementById("taskPerson").value,
-      done: false
-    });
-    save("nq-tasks", tasks);
-    e.target.reset();
-    renderTasks();
+function renderTasks() {
+  const c = $('tasks');
+  c.innerHTML = '';
+  if (!tasks.length) return empty('tasks', 'Aucune tâche pour le moment.');
+  tasks.forEach(task => {
+    const row = document.createElement('div');
+    row.className = 'item';
+    const label = document.createElement('label');
+    const box = document.createElement('input');
+    box.type = 'checkbox';
+    box.checked = !!task.done;
+    box.addEventListener('change', () => updateRow('tasks', task.id, {done: box.checked}));
+    const text = document.createElement('span');
+    text.textContent = task.name + ' — ' + (task.assigned_to || 'À deux');
+    if (task.done) text.className = 'done';
+    label.append(box, text);
+    row.append(label, deleteButton(() => removeRow('tasks', task.id)));
+    c.append(row);
   });
+}
 
-  document.getElementById("shoppingForm").addEventListener("submit", e => {
-    e.preventDefault();
-    shopping.push({
-      id: Date.now(),
-      name: document.getElementById("shoppingName").value,
-      done: false
-    });
-    save("nq-shopping", shopping);
-    e.target.reset();
-    renderShopping();
+function renderShopping() {
+  const c = $('shopping');
+  c.innerHTML = '';
+  if (!shopping.length) return empty('shopping', 'Votre liste est vide.');
+  shopping.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'item';
+    const label = document.createElement('label');
+    const box = document.createElement('input');
+    box.type = 'checkbox';
+    box.checked = !!item.done;
+    box.addEventListener('change', () => updateRow('shopping', item.id, {done: box.checked}));
+    const text = document.createElement('span');
+    text.textContent = item.name;
+    if (item.done) text.className = 'done';
+    label.append(box, text);
+    row.append(label, deleteButton(() => removeRow('shopping', item.id)));
+    c.append(row);
   });
+}
 
-  document.getElementById("projectForm").addEventListener("submit", e => {
-    e.preventDefault();
-    projects.push({
-      id: Date.now(),
-      name: document.getElementById("projectName").value
-    });
-    save("nq-projects", projects);
-    e.target.reset();
-    renderProjects();
+function renderProjects() {
+  const c = $('projectsList');
+  c.innerHTML = '';
+  if (!projects.length) return empty('projectsList', 'Ajoutez votre premier projet à deux !');
+  projects.forEach(project => {
+    const row = document.createElement('div');
+    row.className = 'item';
+    const name = document.createElement('span');
+    name.textContent = '♡ ' + project.name;
+    row.append(name, deleteButton(() => removeRow('projects', project.id)));
+    c.append(row);
   });
+}
 
+async function loadAll() {
+  if (!spaceId) return;
+  $('syncStatus').textContent = 'Synchronisation…';
+  const tables = ['events', 'tasks', 'shopping', 'projects'];
+  const results = await Promise.all(
+    tables.map(table => db.from(table).select('*').eq('space_id', spaceId))
+  );
+  const failed = results.find(r => r.error);
+  if (failed) throw failed.error;
+
+  [events, tasks, shopping, projects] = results.map(r => r.data || []);
   renderEvents();
   renderTasks();
   renderShopping();
   renderProjects();
-</script>
+  $('syncStatus').textContent = '✓ Synchronisé';
+}
 
+async function removeRow(table, id) {
+  const {error} = await db.from(table).delete().eq('id', id).eq('space_id', spaceId);
+  if (error) return alert('Erreur : ' + error.message);
+  await loadAll();
+}
+
+async function updateRow(table, id, values) {
+  const {error} = await db.from(table).update(values).eq('id', id).eq('space_id', spaceId);
+  if (error) return alert('Erreur : ' + error.message);
+  await loadAll();
+}
+
+async function addRow(table, values) {
+  const {error} = await db.from(table).insert({...values, space_id: spaceId});
+  if (error) throw error;
+  await loadAll();
+}
+
+async function connectUser(user) {
+  showApp(user);
+  $('syncStatus').textContent = 'Recherche de votre espace…';
+
+  const {data: membership, error} = await db
+    .from('shared_space_members')
+    .select('space_id')
+    .eq('user_id', user.id)
+    .limit(1)
+    .maybeSingle();
+
+  if (error) throw error;
+  if (!membership) throw new Error('Ce compte ne semble pas membre de l’espace partagé.');
+
+  spaceId = membership.space_id;
+
+  const {data: space, error: spaceError} = await db
+    .from('shared_spaces')
+    .select('name')
+    .eq('id', spaceId)
+    .single();
+
+  if (spaceError) throw spaceError;
+
+  $('signedInAs').textContent = (space.name || 'Notre espace') + ' • ' + user.email;
+  await loadAll();
+
+  if (realtimeChannel) await db.removeChannel(realtimeChannel);
+
+  realtimeChannel = db.channel('nq-shared-' + spaceId);
+
+  ['events', 'tasks', 'shopping', 'projects'].forEach(table => {
+    realtimeChannel.on('postgres_changes', {
+      event: '*',
+      schema: 'public',
+      table: table,
+      filter: 'space_id=eq.' + spaceId
+    }, () => loadAll().catch(err => console.error(err)));
+  });
+
+  realtimeChannel.subscribe(status => {
+    if (status === 'SUBSCRIBED') $('syncStatus').textContent = '✓ Synchronisé en direct';
+  });
+}
+
+function connectionError(error) {
+  console.error(error);
+  showLogin();
+  showMessage('Connexion impossible : ' + (error.message || 'erreur inconnue'), true);
+}
+
+$('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  $('loginButton').disabled = true;
+  $('loginButton').textContent = 'Connexion…';
+
+  try {
+    const {data, error} = await db.auth.signInWithPassword({
+      email: $('email').value.trim(),
+      password: $('password').value
+    });
+    if (error) throw error;
+    await connectUser(data.user);
+  } catch (error) {
+    connectionError(error);
+  } finally {
+    $('loginButton').disabled = false;
+    $('loginButton').textContent = 'Se connecter';
+  }
+});
+
+$('logoutButton').addEventListener('click', async () => {
+  if (realtimeChannel) await db.removeChannel(realtimeChannel);
+  await db.auth.signOut();
+  spaceId = null;
+  showLogin();
+});
+
+$('eventForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  try {
+    await addRow('events', {
+      name: $('eventName').value.trim(),
+      event_date: $('eventDate').value,
+      event_time: $('eventTime').value || null
+    });
+    e.target.reset();
+  } catch (err) { alert('Erreur : ' + err.message); }
+});
+
+$('taskForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  try {
+    await addRow('tasks', {
+      name: $('taskName').value.trim(),
+      assigned_to: $('taskPerson').value,
+      done: false
+    });
+    e.target.reset();
+  } catch (err) { alert('Erreur : ' + err.message); }
+});
+
+$('shoppingForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  try {
+    await addRow('shopping', {
+      name: $('shoppingName').value.trim(),
+      done: false
+    });
+    e.target.reset();
+  } catch (err) { alert('Erreur : ' + err.message); }
+});
+
+$('projectForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  try {
+    await addRow('projects', {name: $('projectName').value.trim()});
+    e.target.reset();
+  } catch (err) { alert('Erreur : ' + err.message); }
+});
+
+(async () => {
+  const {data, error} = await db.auth.getSession();
+  if (error) return connectionError(error);
+  if (data.session) {
+    try {
+      await connectUser(data.session.user);
+    } catch (err) {
+      connectionError(err);
+    }
+  }
+})();
+</script>
 </body>
 </html>
