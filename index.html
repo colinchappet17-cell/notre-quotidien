@@ -176,7 +176,46 @@ let realtimeChannel = null;
 let events = [], tasks = [], shopping = [], projects = [];
 
 const $ = id => document.getElementById(id);
+const params = new URLSearchParams(window.location.hash.substring(1));
 
+if (params.get("type") === "recovery") {
+  document.body.innerHTML = `
+    <main class="container" style="max-width:500px;margin:4rem auto">
+      <article>
+        <h2>Nouveau mot de passe</h2>
+        <form id="password-form">
+          <input type="password" id="new-password"
+            placeholder="Nouveau mot de passe" required minlength="8">
+          <input type="password" id="confirm-password"
+            placeholder="Confirmer le mot de passe" required minlength="8">
+          <button type="submit">Enregistrer mon mot de passe</button>
+        </form>
+        <p id="password-message"></p>
+      </article>
+    </main>
+  `;
+
+  document.getElementById("password-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const password = document.getElementById("new-password").value;
+    const confirmation = document.getElementById("confirm-password").value;
+    const message = document.getElementById("password-message");
+
+    if (password !== confirmation) {
+      message.textContent = "Les deux mots de passe ne correspondent pas.";
+      return;
+    }
+
+    const { error } = await db.auth.updateUser({ password });
+
+    if (error) {
+      message.textContent = "Erreur : " + error.message;
+    } else {
+      message.textContent = "Mot de passe modifié ! Tu peux maintenant te connecter.";
+    }
+  });
+}
 function showMessage(message, error = false) {
   const el = $('authMessage');
   el.textContent = message;
